@@ -5,6 +5,27 @@ namespace Geom2d {
 	class Base2d {
 	}
 	
+	class Line2d : Base2d {
+	public:
+		Point2d StartPoint;
+		Point2d EndPoint;
+
+		Line2d (Point2d const &startPoint, Point2d const &endPoint) {
+			(*this).StartPoint = startPoint;
+			(*this).EndPoint = endPoint;
+		}
+
+		Line2d (double x1, double y1, double x2, double y2) {
+			(*this).StartPoint = Point2d(x1, y1);
+			(*this).EndPoint = Point2d(x2, y2);
+		}
+
+		double GetLength() { return StartPoint.DistanceTo(EndPoint); }
+		Vector2d GetDirection() { return Vector2d(StartPoint, EndPoint).Normalise(); }
+		Vector2d GetNormal() { return GetDirection.Normal(); }
+
+	}
+
 	class Point2d : Base2d {
 	public:
 		double X;
@@ -51,8 +72,6 @@ namespace Geom2d {
 			);
 		}
 	}
-
-	class Line2d {}
 
 	class Vector2d {}
 };
