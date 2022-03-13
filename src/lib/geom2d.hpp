@@ -4,18 +4,25 @@ namespace Geom2d {
 	class Base2d {
 	};
 
-	class Line2d;
-	class Point2d;
-	class Vector2d;
-	
+	class Vector2d : Base2d {
+	public:
+		double U;
+		double V;
+
+		Vector2d (double x, double y) {
+			U = x;
+			V = y;
+		};
+	};
+
 	class Point2d : Base2d {
 	public:
 		double X;
 		double Y;
 
 		Point2d (double x, double y) {
-			(*this).X = x;
-			(*this).Y = y;
+			X = x;
+			Y = y;
 		}
 
 		Point2d operator + (Point2d Point2) {
@@ -30,7 +37,7 @@ namespace Geom2d {
 			return std::sqrt(std::pow((X - Point2.X), 2) + std::pow((Y - Point2.Y), 2));
 		}
 
-		Point2d Move(Vector2d Vector) {
+		Vector2d Move(Vector2d Vector) {
 			return Vector2d(X + Vector.U, Y + Vector.V);
 		}
 
@@ -52,8 +59,7 @@ namespace Geom2d {
 			);
 		}
 	};
-	
-	class Vector2d {};
+
 	/*
 	class Line2d : Base2d {
 	public:
@@ -61,13 +67,13 @@ namespace Geom2d {
 		Point2d EndPoint;
 
 		Line2d (Point2d const &startPoint, Point2d const &endPoint) {
-			(*this).StartPoint = startPoint;
-			(*this).EndPoint = endPoint;
+			StartPoint = startPoint;
+			EndPoint = endPoint;
 		}
 
 		Line2d (double x1, double y1, double x2, double y2) {
-			(*this).StartPoint = Point2d(x1, y1);
-			(*this).EndPoint = Point2d(x2, y2);
+			StartPoint = Point2d(x1, y1);
+			EndPoint = Point2d(x2, y2);
 		}
 
 		double GetLength() { return StartPoint.DistanceTo(EndPoint); }
