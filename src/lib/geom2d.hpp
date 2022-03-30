@@ -1,61 +1,61 @@
 #include <cmath>
 
-namespace Geom2d {
-	class Base2d {
+namespace geom2d {
+	class base2d {
 	};
 
-	class Vector2d : Base2d {
+	class vector2d : base2d {
 	public:
-		double U;
-		double V;
+		double u;
+		double v;
 
-		Vector2d (double x, double y) {
-			U = x;
-			V = y;
+		vector2d (double x, double y) {
+			u = x;
+			v = y;
 		};
 	};
 
-	class Point2d : Base2d {
+	class point2d : base2d {
 	public:
-		double X;
-		double Y;
+		double x;
+		double y;
 
-		Point2d (double x, double y) {
-			X = x;
-			Y = y;
+		point2d (double x, double y) {
+			x = x;
+			y = y;
 		}
 
-		Point2d operator + (Point2d Point2) {
-			return Point2d(X + Point2.X, Y + Point2.Y);
+		point2d operator + (point2d point2) {
+			return point2d(x + point2.x, y + point2.y);
 		}
 
-		Geom2d::Vector2d operator - (Point2d Point2) {
-			return Vector2d (X - Point2.X, Y - Point2.Y);
+		geom2d::vector2d operator - (point2d point2) {
+			return vector2d (x - point2.x, y - point2.y);
 		}
 
-		double DistanceTo(Point2d Point2) {
-			return std::sqrt(std::pow((X - Point2.X), 2) + std::pow((Y - Point2.Y), 2));
+		double distance_to(point2d point2) {
+			return std::sqrt(std::pow((x - point2.x), 2) + std::pow((y - point2.y), 2));
 		}
 
-		Vector2d Move(Vector2d Vector) {
-			return Vector2d(X + Vector.U, Y + Vector.V);
+		vector2d move(vector2d vector) {
+			return vector2d(x + vector.u, y + vector.v);
 		}
 
-		Point2d Rotate(double angleDeg, double u = 0, double v = 0) {
-			double AngleRad = 3.14159 * angleDeg / 180;
-			double Sin = std::sin(AngleRad);
-			double Cos = std::cos(AngleRad);
+		point2d rotate(double angle_deg, double u = 0, double v = 0) {
+			double angle_rad = 3.14159 * angle_deg / 180;
+			double sin = std::sin(angle_rad);
+			double cos = std::cos(angle_rad);
 
-			return Point2d(
-				X * Cos - Y * Sin + u * (1 - Cos) + v * Sin,
-				X * Sin + Y * Cos + v * (1 - Cos) - u * Sin
+			return point2d(
+				x * cos - y * sin + u * (1 - cos) + v * sin,
+				x * sin + y * cos + v * (1 - cos) - u * sin
 			);
 		}
 
-		Point2d Scale(double scaleX, double scaleY, double u = 0, double v = 0) {
-			return Point2d(
-				X * scaleX + u * (1 - scaleX),
-				Y * scaleY + v * (1 - scaleY)
+		point2d scale(double scale_x, double scale_y, double u = 0, double v = 0) {
+			return point2d(
+				x * scale_x + u * (1 - scale_x),
+				y * scale_y + v * (1 - scale_y)
 			);
 		}
 	};
@@ -63,22 +63,22 @@ namespace Geom2d {
 	/*
 	class Line2d : Base2d {
 	public:
-		Point2d StartPoint;
-		Point2d EndPoint;
+		point2d StartPoint;
+		point2d EndPoint;
 
-		Line2d (Point2d const &startPoint, Point2d const &endPoint) {
+		Line2d (point2d const &startPoint, point2d const &endPoint) {
 			StartPoint = startPoint;
 			EndPoint = endPoint;
 		}
 
 		Line2d (double x1, double y1, double x2, double y2) {
-			StartPoint = Point2d(x1, y1);
-			EndPoint = Point2d(x2, y2);
+			StartPoint = point2d(x1, y1);
+			EndPoint = point2d(x2, y2);
 		}
 
 		double GetLength() { return StartPoint.DistanceTo(EndPoint); }
-		Vector2d GetDirection() { return Vector2d(StartPoint, EndPoint).Normalise(); }
-		Vector2d GetNormal() { return GetDirection.Normal(); }
+		vector2d GetDirection() { return vector2d(StartPoint, EndPoint).Normalise(); }
+		vector2d GetNormal() { return GetDirection.Normal(); }
 
 	};
 	*/
