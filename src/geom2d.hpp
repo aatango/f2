@@ -1,68 +1,59 @@
-#include <cmath>
 
-namespace geom2d {
-	class base2d {
+namespace geom2 {
+
+	template <class T>
+	class base2 {
 	};
 
-	class vector2d : base2d {
-	public:
-		double u;
-		double v;
 
-		vector2d (const double X, const double Y) {
-			u = X;
-			v = Y;
-		};
+	template <class T>
+	class vector2_generic : base2<T> {
+	public:
+		T u;
+		T v;
+
+		vector2_generic();
+		vector2_generic (const T _u, const T _v); 
 	};
 
-	class point2d : base2d {
+	template class vector2_generic<float>;
+	typedef vector2_generic<float> vector2f;
+
+	template class vector2_generic<double>;
+	typedef vector2_generic<double> vector2d;
+
+
+	template <class T>
+	class point2_generic : base2<T> {
 	public:
-		double x;
-		double y;
+		T x;
+		T y;
 
-		point2d (const double X, const double Y) {
-			x = X;
-			y = Y;
-		}
+		point2_generic ();
+		point2_generic (const T _x, const T _y);
 
-		bool operator == (const point2d point2) const {
-			return this == &point2 ? true : x == point2.x && y == point2.y;
-		}
+		bool operator == (const point2_generic& point2) const;
 		
-		point2d operator + (const point2d point2) const {
-			return point2d(x + point2.x, y + point2.y);
-		}
+		point2_generic operator + (const point2_generic& point2) const;
 
-		geom2d::vector2d operator - (const point2d point2) const {
-			return vector2d (x - point2.x, y - point2.y);
-		}
+		geom2::vector2_generic<T> operator - (const point2_generic& point2) const;
 
-		double distance_to(point2d point2) {
-			return std::sqrt(std::pow((x - point2.x), 2) + std::pow((y - point2.y), 2));
-		}
+		T distance_to(point2_generic& point2);
 
-		vector2d move(vector2d vector) {
-			return vector2d(x + vector.u, y + vector.v);
-		}
+		/*
+		vector2d move(vector2d vector);
 
-		point2d rotate(double angle_deg, double u = 0, double v = 0) {
-			double angle_rad = 3.14159 * angle_deg / 180;
-			double sin = std::sin(angle_rad);
-			double cos = std::cos(angle_rad);
+		point2d rotate(double angle_deg, double u,  double v);
 
-			return point2d(
-				x * cos - y * sin + u * (1 - cos) + v * sin,
-				x * sin + y * cos + v * (1 - cos) - u * sin
-			);
-		}
-
-		point2d scale(double scale_x, double scale_y, double u = 0, double v = 0) {
-			return point2d(
-				x * scale_x + u * (1 - scale_x),
-				y * scale_y + v * (1 - scale_y)
-			);
-		}
+		point2d scale(double scale_x, double scale_y, double u, double v);
+		*/
 	};
+
+	template class point2_generic<float>;
+	typedef point2_generic<float> point2f;
+
+	template class point2_generic<double>;
+	typedef point2_generic<double> point2d;
 
 	/*
 	class Line2d : Base2d {
