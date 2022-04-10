@@ -11,6 +11,10 @@ The detailed results are output to an ASCII file, which is split into the follow
 == 1. Summary of results
 _(Also included in the console printout)_
 
+//Quick checksum; max N, V, and M values; max reaction components. Always with their associated node, bar.
+
+TBD
+
 == 2. Nodal results
 
 ----
