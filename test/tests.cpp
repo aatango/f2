@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-#include "../src/lib/geom2d.hpp"
+#include "../src/geom2d.hpp"
 
 TEST_SUITE("Point2d") {
 	auto point1 = geom2d::point2d(1, 2);
