@@ -9,9 +9,9 @@ namespace geom2d {
 		double u;
 		double v;
 
-		vector2d (double x, double y) {
-			u = x;
-			v = y;
+		vector2d (const double X, const double Y) {
+			u = X;
+			v = Y;
 		};
 	};
 
@@ -20,16 +20,20 @@ namespace geom2d {
 		double x;
 		double y;
 
-		point2d (double x, double y) {
-			x = x;
-			y = y;
+		point2d (const double X, const double Y) {
+			x = X;
+			y = Y;
 		}
 
-		point2d operator + (point2d point2) {
+		bool operator == (const point2d point2) const {
+			return this == &point2 ? true : x == point2.x && y == point2.y;
+		}
+		
+		point2d operator + (const point2d point2) const {
 			return point2d(x + point2.x, y + point2.y);
 		}
 
-		geom2d::vector2d operator - (point2d point2) {
+		geom2d::vector2d operator - (const point2d point2) const {
 			return vector2d (x - point2.x, y - point2.y);
 		}
 
