@@ -1,16 +1,21 @@
 # f2
-//An implementation of the direct stiffness method for planar frame analysis.
-A planar frame analysis tool, developed for educational purposes.
+*An implementation of the direct stiffness method for linear analysis of planar frames.*
 
-This repository is to contain the underlying libraries needed for the calculation, as well as a simple command line application to allow for their execution.
+<!--[Getting started](README.md#getting-started) | [FAQ](README.md#faq) For later; README is currently too small to benefit from this.-->
 
-## Why?
-There are two main motivations for this endeavour: firstly the desire to procude a "non-trivial" project to help me develop my software development skills; it also has the long term goal of becoming an alternative to an educational tool that existed at the time I was studying structural engineering, but seems to have since gone behind a registration paywall.
+This repository is intended to host the underlying logic needed for the calculation, as well as a simple CLI. GUI frontends will be hosted on their own, even if directly referencing to this library.
 
-## Setup
-TBD
+## Getting started
+### Setup
+TBD.
 
-## Usage
-TBD
+### Usage
+***The following represents the current design intent, and is not yet implemented!***
+
+Run **f2** with at least two arguments: one *.f2g* file, which includes all the geometrical definitions; and, at least, one *.f2l* file, defining a single load case.
+
+In the end, a quick summary of the calculation is shown in the terminal, with more detailed descriptions being writen to output files. Should more than one load case be input, these conclusions include both results for each given load case, and a single, unfactored, result combination of all of included cases.
 
 ## FAQ
+### Why?
+There are two main motivations for this endeavour: firstly, the desire to procude a "non-trivial" project to help me develop my software development skills; it also has the long term goal of becoming an alternative to an educational tool that existed at the time I was studying structural engineering (which seems to have since gone behind a registration paywall).
