@@ -7,14 +7,14 @@ using namespace geom2;
 
 
 template<class T>
-vector2_generic<T>::vector2_generic (): u(0), v(0) {}
+vector2_generic<T>::vector2_generic () {}
 
 template <class T> 
 vector2_generic<T>::vector2_generic (const T _u, const T _v): u(_u), v(_v) {}
 
 
 template<class T>
-point2_generic<T>::point2_generic (): x(0), y(0) {}
+point2_generic<T>::point2_generic () {}
 
 template <class T> 
 point2_generic<T>::point2_generic (const T _x, const T _y): x(_x), y(_y) {}
@@ -34,11 +34,20 @@ vector2_generic<T> point2_generic<T>::operator - (const point2_generic& point2) 
 	return vector2_generic (x - point2.x, y - point2.y);
 }
 
-template <class T> T 
-point2_generic<T>::distance_to(point2_generic& point2) {
+template <class T> 
+T point2_generic<T>::distance_to(const point2_generic& point2) {
 	return std::sqrt(std::pow((x - point2.x), 2) + std::pow((y - point2.y), 2));
 }
 
+
+template <class T>
+node2_generic<T>::node2_generic () {}
+
+template <class T>
+node2_generic<T>::node2_generic (const T _x, const T _y) {
+	this->x = _x;
+	this->y = _y;
+}
 /*
 vector2d point2d::move(vector2d vector) {
 	return vector2d(x + vector.u, y + vector.v);

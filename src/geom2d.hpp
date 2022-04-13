@@ -1,3 +1,7 @@
+#ifndef H_GEOM2D
+#define GEOM2D_H
+
+#include <array>
 
 namespace geom2 {
 
@@ -15,19 +19,16 @@ namespace geom2 {
 		vector2_generic();
 		vector2_generic (const T _u, const T _v); 
 	};
-
 	template class vector2_generic<float>;
-	typedef vector2_generic<float> vector2f;
-
 	template class vector2_generic<double>;
+	typedef vector2_generic<float> vector2f;
 	typedef vector2_generic<double> vector2d;
-
 
 	template <class T>
 	class point2_generic : base2<T> {
 	public:
-		T x;
-		T y;
+		T x = 0;
+		T y = 0;
 
 		point2_generic ();
 		point2_generic (const T _x, const T _y);
@@ -38,7 +39,7 @@ namespace geom2 {
 
 		geom2::vector2_generic<T> operator - (const point2_generic& point2) const;
 
-		T distance_to(point2_generic& point2);
+		T distance_to(const point2_generic& point2);
 
 		/*
 		vector2d move(vector2d vector);
@@ -48,12 +49,25 @@ namespace geom2 {
 		point2d scale(double scale_x, double scale_y, double u, double v);
 		*/
 	};
-
 	template class point2_generic<float>;
-	typedef point2_generic<float> point2f;
-
 	template class point2_generic<double>;
+	typedef point2_generic<float> point2f;
 	typedef point2_generic<double> point2d;
+
+	template <class T>
+	class node2_generic : public point2_generic<T> {
+	public:
+		int id = 0;
+		std::array<T, 3> loads;
+		std::array<T, 3> supports;
+
+		node2_generic();
+		node2_generic(const T _x, const T _y);
+	};
+	template class node2_generic<float>;
+	template class node2_generic<double>;
+	typedef node2_generic<float> node2f;
+	typedef node2_generic<double> node2d;
 
 	/*
 	class Line2d : Base2d {
@@ -78,3 +92,4 @@ namespace geom2 {
 	};
 	*/
 };
+# endif

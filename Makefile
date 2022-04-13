@@ -1,4 +1,4 @@
-all: bin/geom2d.o bin/test.o bin/main.o
+all: bin/geom2d.o bin/test_geom2d.o
 	g++ bin/*.o -o bin/f2
 	./bin/f2
 #	echo $(test)
@@ -6,12 +6,9 @@ all: bin/geom2d.o bin/test.o bin/main.o
 bin/geom2d.o: src/geom2d.cpp
 	g++ -c src/geom2d.cpp -o $@
 
-bin/test.o: test/tests.cpp
-	g++ -I src/ test/tests.cpp -c -o $@
+bin/test_geom2d.o: test/test_geom2d.cpp
+	g++ -I src/ test/test_geom2d.cpp -c -o $@
 
-bin/main.o: src/main.cpp
-	g++ -c src/main.cpp -o $@
-	
 # From Kakoune's Makefile
 debug ?= y
 
