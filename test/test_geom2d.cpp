@@ -28,8 +28,17 @@ TEST_SUITE("Point2d") {
 	point2d point1(1, 2);
 	point2d point2(4, 6);
 	TEST_CASE("Operator overloads") {
-		CHECK_EQ(point1, point1);
-		CHECK_EQ(point1 + point2, point2d(5, 8));
+		SUBCASE("Equals another point object") {
+			CHECK_EQ(point1, point1);
+			CHECK_EQ(point1 + point2, point2d(5, 8));
+		}
+		SUBCASE("Equals array with coordinates") {
+			double point[2] {1, 2};
+			CHECK_EQ(point1, point);
+
+			std::array<double, 2> pt {4, 6};
+			CHECK_EQ(point2, pt);
+		}
 	}
 	TEST_CASE("Methods") {
 		CHECK_EQ(point1.distance_to(point2), 5);

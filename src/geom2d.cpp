@@ -23,6 +23,16 @@ template <class T>
 bool point2_generic<T>::operator == (const point2_generic& point2) const {
 	return this == &point2 ? true : x == point2.x && y == point2.y;
 }
+
+template <class T>
+bool point2_generic<T>::operator == (const T  _point[2]) const {
+	return *this == point2_generic<T>(_point[0], _point[1]);
+}
+
+template <class T>
+bool point2_generic<T>::operator == (const std::array<T, 2>& _point) const {
+	return *this == point2_generic<T>(_point[0], _point[1]);
+}
 	
 template <class T> 
 point2_generic<T> point2_generic<T>::operator + (const point2_generic& point2) const {

@@ -34,6 +34,8 @@ namespace geom2 {
 		point2_generic (const T _x, const T _y);
 
 		bool operator == (const point2_generic& point2) const;
+		bool operator == (const  T _point[2]) const;
+		bool operator == (const std::array<T, 2>& _point) const;
 		point2_generic operator + (const point2_generic& point2) const;
 		geom2::vector2_generic<T> operator - (const point2_generic& point2) const;
 
