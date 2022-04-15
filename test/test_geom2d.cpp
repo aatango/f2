@@ -5,9 +5,10 @@
 
 #include "geom2d.hpp"
 
+
 TEST_SUITE("Point2d") {
 
-	TEST_CASE("Definition") {
+	TEST_CASE("Constructors") {
 		SUBCASE("Default") {
 			geom2::point2d point1;
 			CHECK_EQ(point1.x, 0);
@@ -36,7 +37,7 @@ TEST_SUITE("Point2d") {
 }
 
 TEST_SUITE("Vector2d") {
-	TEST_CASE("Definition") {
+	TEST_CASE("Constructors") {
 		SUBCASE("Default") {
 			geom2::vector2d vector1;
 			CHECK_EQ(vector1.u, 0);
@@ -50,7 +51,7 @@ TEST_SUITE("Vector2d") {
 }
 
 TEST_SUITE("Node2d") {
-	TEST_CASE("Definition") {
+	TEST_CASE("Constructors") {
 		SUBCASE("Default") {
 			geom2::node2d node1;
 
@@ -66,3 +67,23 @@ TEST_SUITE("Node2d") {
 	}
 }
 
+TEST_SUITE("Line2d") {
+	TEST_CASE("Constructors") {
+		SUBCASE("From existing points") {
+			geom2::point2d point1;
+			geom2::point2d point2(1, 2);
+
+			geom2::line2d line1(point1, point2);
+
+			//New definitions to make sure we aren't doing circular tests.
+			CHECK_EQ(line1.start_point, geom2::point2d());
+			CHECK_EQ(line1.end_point, geom2::point2d(1, 2));
+		}
+		SUBCASE("From coordinates") {
+			geom2::line2d line2(1, 2, 4, 6);
+
+			CHECK_EQ(line2.start_point, geom2::point2d(1, 2));
+			CHECK_EQ(line2.end_point, geom2::point2d(4, 6));
+		}
+	}
+}

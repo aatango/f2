@@ -71,25 +71,12 @@ point2d point2d::scale(double scale_x, double scale_y, double u = 0, double v = 
 	);
 }
 */
-/*
-class Line2d : Base2d {
-public:
-	point2d StartPoint;
-	point2d EndPoint;
+line2d::line2d (const point2d& _start_point, const point2d& _end_point) : 
+	start_point(_start_point), end_point(_end_point) {}
 
-	Line2d (point2d const &startPoint, point2d const &endPoint) {
-		StartPoint = startPoint;
-		EndPoint = endPoint;
-	}
+line2d::line2d (const double _x1, const double _y1, const double _x2, const double _y2) :
+	start_point(point2d(_x1, _y1)), end_point(point2d(_x2, _y2)) {}
 
-	Line2d (double x1, double y1, double x2, double y2) {
-		StartPoint = point2d(x1, y1);
-		EndPoint = point2d(x2, y2);
-	}
-
-	double GetLength() { return StartPoint.DistanceTo(EndPoint); }
-	vector2d GetDirection() { return vector2d(StartPoint, EndPoint).Normalise(); }
-	vector2d GetNormal() { return GetDirection.Normal(); }
-
-};
-*/
+double line2d::get_length() { return start_point.distance_to(end_point); }
+//auto line2d::get_direction() { return vector2d(start_point, end_point).normalise(); }
+//auto line2d::get_normal() { return Line2d::get_direction.normal(); }

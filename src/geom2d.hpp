@@ -16,7 +16,7 @@ namespace geom2 {
 		T u;
 		T v;
 
-		vector2_generic();
+		vector2_generic ();
 		vector2_generic (const T _u, const T _v); 
 	};
 	template class vector2_generic<float>;
@@ -34,9 +34,7 @@ namespace geom2 {
 		point2_generic (const T _x, const T _y);
 
 		bool operator == (const point2_generic& point2) const;
-		
 		point2_generic operator + (const point2_generic& point2) const;
-
 		geom2::vector2_generic<T> operator - (const point2_generic& point2) const;
 
 		T distance_to(const point2_generic& point2);
@@ -61,35 +59,33 @@ namespace geom2 {
 		std::array<T, 3> loads;
 		std::array<T, 3> supports;
 
-		node2_generic();
-		node2_generic(const T _x, const T _y);
+		node2_generic ();
+		node2_generic (const T _x, const T _y);
 	};
 	template class node2_generic<float>;
 	template class node2_generic<double>;
 	typedef node2_generic<float> node2f;
 	typedef node2_generic<double> node2d;
 
-	/*
-	class Line2d : Base2d {
+	
+	class line2d : base2<double> {
 	public:
-		point2d StartPoint;
-		point2d EndPoint;
+		point2d start_point;
+		point2d end_point;
 
-		Line2d (point2d const &startPoint, point2d const &endPoint) {
-			StartPoint = startPoint;
-			EndPoint = endPoint;
-		}
-
-		Line2d (double x1, double y1, double x2, double y2) {
-			StartPoint = point2d(x1, y1);
-			EndPoint = point2d(x2, y2);
-		}
-
-		double GetLength() { return StartPoint.DistanceTo(EndPoint); }
-		vector2d GetDirection() { return vector2d(StartPoint, EndPoint).Normalise(); }
-		vector2d GetNormal() { return GetDirection.Normal(); }
-
+		line2d (const point2d& _start_point, const point2d& _end_point);
+		line2d (const double _x1, const double _y1, const double _x2, const double _y2);
+		
+		double get_length();
+		vector2d get_direction();
+		vector2d GetNormal();
 	};
+	/*
+	class beam2d : line2d {
+	public:
+		int id = 0;
+		double cross_section = 0;
+		double young_modulus = 0;
 	*/
 };
 # endif
