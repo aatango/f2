@@ -4,17 +4,16 @@
 #include <array>
 
 namespace geom2d {
-	class node2d {
-		public:
-		unsigned char _id;
-		double _x;
-		double _y;
-		std::array<double, 2> _forces;
-		std::array<double, 2> _displacements;
+	struct node2d {
+		unsigned char id;
+		double x;
+		double y;
+		std::array<double, 2> forces;
+		std::array<double, 2> displacements;
 
-		public:
 		node2d();
-		node2d(const double x, const double y);
+		node2d(const double _x, const double _y);
+
 
 /*		bool operator == (const point2_generic& point2) const;
 		bool operator == (const  T _point[2]) const;
@@ -33,18 +32,17 @@ namespace geom2d {
 	};
 
 
-	class beam2d {
-		unsigned char _id;
-		node2d _start_point;
-		node2d _end_point;
-		double _cross_section;
-		double _young_modulus;
+	struct beam2d {
+		unsigned char id;
+		node2d start_point;
+		node2d end_point;
+		double cross_section;
+		double young_modulus;
 
-	public:
-		beam2d (const unsigned char id, const node2d& start_point, const node2d& end_point);
-		beam2d (const unsigned char id,
-		        const double x1, const double y1,
-		        const double x2, const double y2);
+		beam2d (const unsigned char _id, const node2d& _start_point, const node2d& _end_point);
+		beam2d (const unsigned char _id,
+		        const double _x1, const double _y1,
+		        const double _x2, const double _y2);
 	
 		/*double get_length();
 		vector2d get_direction();
