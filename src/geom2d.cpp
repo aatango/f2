@@ -8,6 +8,10 @@ using namespace geom2d;
 node2d::node2d() : x(0), y(0) {}
 node2d::node2d(const double _x, const double _y) :  x(_x), y(_y) {}
 
+bool node2d::operator == (const node2d& _node2) const {
+	return x == _node2.x && y == _node2.y;
+}
+
 /*template <class T> 
 bool point2_generic<T>::operator == (const point2_generic& point2) const {
 	return this == &point2 ? true : x == point2.x && y == point2.y;
@@ -39,13 +43,15 @@ T point2_generic<T>::distance_to(const point2_generic& point2) {
 }
 */
 
-beam2d::beam2d (const unsigned char _id, const node2d& _start_point, const node2d& _end_point) :
-	id(_id), start_point(_start_point), end_point(_end_point) {}
+beam2d::beam2d (const node2d& _start_point, const node2d& _end_point) :
+	start_point(_start_point), end_point(_end_point) {}
 
-beam2d::beam2d (const unsigned char _id,
-        const double _x1, const double _y1,
-        const double _x2, const double _y2) :
-        id(_id), start_point(node2d(_x1, _y1)), end_point(node2d(_x2, _y2)) {}
+beam2d::beam2d (const double _x1, const double _y1,const double _x2, const double _y2) :
+        start_point(node2d(_x1, _y1)), end_point(node2d(_x2, _y2)) {}
+
+bool beam2d::operator == (const beam2d& _beam2) const {
+	return start_point == _beam2.start_point && end_point == _beam2.end_point;
+}
 
 //double line2d::get_length() { return start_point.distance_to(end_point); }
 //auto line2d::get_direction() { return vector2d(start_point, end_point).normalise(); }

@@ -5,7 +5,7 @@
 
 namespace geom2d {
 	struct node2d {
-		unsigned char id;
+		//unsigned char id;
 		double x;
 		double y;
 		std::array<double, 2> forces;
@@ -14,11 +14,11 @@ namespace geom2d {
 		node2d();
 		node2d(const double _x, const double _y);
 
+		// Exists mostly to allow other tests.
+		bool operator == (const node2d& _node2) const;
 
-/*		bool operator == (const point2_generic& point2) const;
-		bool operator == (const  T _point[2]) const;
-		bool operator == (const std::array<T, 2>& _point) const;
-		point2_generic operator + (const point2_generic& point2) const;
+
+/*		point2_generic operator + (const point2_generic& point2) const;
 		geom2::vector2_generic<T> operator - (const point2_generic& point2) const;
 
 		T distance_to(const point2_generic& point2);
@@ -33,28 +33,22 @@ namespace geom2d {
 
 
 	struct beam2d {
-		unsigned char id;
+		//unsigned char id;
 		node2d start_point;
 		node2d end_point;
 		double cross_section;
 		double young_modulus;
 
-		beam2d (const unsigned char _id, const node2d& _start_point, const node2d& _end_point);
-		beam2d (const unsigned char _id,
-		        const double _x1, const double _y1,
-		        const double _x2, const double _y2);
+		beam2d (const node2d& _start_point, const node2d& _end_point);
+		beam2d (const double _x1, const double _y1, const double _x2, const double _y2);
+
+		// Exists mostly to allow other tests.
+		bool operator == (const beam2d& _beam2) const;
 	
 		/*double get_length();
 		vector2d get_direction();
 		vector2d GetNormal();*/
 	};
-	/*
-	class beam2d : line2d {
-	public:
-		int id = 0;
-		double cross_section = 0;
-		double young_modulus = 0;
-	*/
 };
 
 # endif // geom2d_hpp_INCLUDED
