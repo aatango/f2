@@ -54,4 +54,6 @@ TEST_SUITE("Beam2d") {
 			beam2d beam1(0, 0, 1, 2);
 			beam2d beam2(0, 0, 1, 2);
 			CHECK_EQ(beam1, beam2);
+		}
+	}
 }
