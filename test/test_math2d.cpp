@@ -17,6 +17,7 @@ TEST_SUITE("math2d") {
 		symm_matrix matrix(3);
 		// Non-symmetrical matrix to check values.
 		// negative at lower triangle.
+		std::vector<double> arr { 4, 12, 16, -12, 37, 43, -16, -43, 98 };
 		SUBCASE("one-by-one") {
 			matrix.set_cell(4, 0, 0);
 			matrix.set_cell(-12, 1, 0);
@@ -27,21 +28,12 @@ TEST_SUITE("math2d") {
 			matrix.set_cell(16, 0, 2);
 			matrix.set_cell(43, 1, 2);
 			matrix.set_cell(98, 2, 2);
-
-			CHECK_EQ(matrix.matrix.at(4), 37);
-			CHECK_EQ(matrix.matrix.at(2), 16);
-			CHECK_EQ(matrix.matrix.at(6), -16);
+			CHECK_EQ(matrix.matrix, arr);
 		}
 		SUBCASE("All at once") {
-			// reseting matrix, just to be sure.
-			std::fill(matrix.matrix.begin(), matrix.matrix.end(), 0);
-			std::vector<double> arr { 4, 12, 16, -12, 37, 43, -16, -43, 98 };
+			std::fill(matrix.matrix.begin(), matrix.matrix.end(), 0);	// Reseting the matrix
 			matrix.fill_matrix(arr);
-
-			CHECK_EQ(matrix.matrix.at(0), 4);
-			CHECK_EQ(matrix.matrix.at(4), 37);
-			CHECK_EQ(matrix.matrix.at(2), 16);
-			CHECK_EQ(matrix.matrix.at(6), -16);
+			CHECK_EQ(matrix.matrix, arr);
 		}
 	}
 	TEST_CASE("LDLT decomposition ex1") {
@@ -51,20 +43,12 @@ TEST_SUITE("math2d") {
 		matrix.decompose();
 
 		SUBCASE("L matrix") {
-			CHECK_EQ(matrix.l_decomp.at(0), 1);
-			CHECK_EQ(matrix.l_decomp.at(1), 0);
-			CHECK_EQ(matrix.l_decomp.at(2), 0);
-			CHECK_EQ(matrix.l_decomp.at(3), 3);
-			CHECK_EQ(matrix.l_decomp.at(4), 1);
-			CHECK_EQ(matrix.l_decomp.at(5), 0);
-			CHECK_EQ(matrix.l_decomp.at(6), -4);
-			CHECK_EQ(matrix.l_decomp.at(7), 5);
-			CHECK_EQ(matrix.l_decomp.at(8), 1);
+			std::vector<double> test_l { 1, 0, 0, 3, 1, 0, -4, 5, 1 };
+			CHECK_EQ(matrix.l_decomp, test_l);
 		}
 		SUBCASE("D matrix") {
-			CHECK_EQ(matrix.d_decomp.at(0), 4);
-			CHECK_EQ(matrix.d_decomp.at(1), 1);
-			CHECK_EQ(matrix.d_decomp.at(2), 9);
+			std::vector<double> test_d { 4, 1, 9 };
+			CHECK_EQ(matrix.d_decomp, test_d);
 		}
 	}
 	TEST_CASE("LDLT decomposition ex2") {
@@ -74,28 +58,12 @@ TEST_SUITE("math2d") {
 		matrix.decompose();
 
 		SUBCASE("L matrix") {
-			CHECK_EQ(matrix.l_decomp.at(0), 1);
-			CHECK_EQ(matrix.l_decomp.at(1), 0);
-			CHECK_EQ(matrix.l_decomp.at(2), 0);
-			CHECK_EQ(matrix.l_decomp.at(3), 0);
-			CHECK_EQ(matrix.l_decomp.at(4), 2);
-			CHECK_EQ(matrix.l_decomp.at(5), 1);
-			CHECK_EQ(matrix.l_decomp.at(6), 0);
-			CHECK_EQ(matrix.l_decomp.at(7), 0);
-			CHECK_EQ(matrix.l_decomp.at(8), -1);
-			CHECK_EQ(matrix.l_decomp.at(9), 3);
-			CHECK_EQ(matrix.l_decomp.at(10), 1);
-			CHECK_EQ(matrix.l_decomp.at(11), 0);
-			CHECK_EQ(matrix.l_decomp.at(12), 1);
-			CHECK_EQ(matrix.l_decomp.at(13), 2);
-			CHECK_EQ(matrix.l_decomp.at(14), 3);
-			CHECK_EQ(matrix.l_decomp.at(15), 1);
+			std::vector<double> test_l { 1, 0, 0, 0, 2, 1, 0, 0, -1, 3, 1, 0, 1, 2, 3, 1 };
+			CHECK_EQ(matrix.l_decomp, test_l);
 		}
 		SUBCASE("D matrix") {
-			CHECK_EQ(matrix.d_decomp.at(0), 2);
-			CHECK_EQ(matrix.d_decomp.at(1), 1);
-			CHECK_EQ(matrix.d_decomp.at(2), 3);
-			CHECK_EQ(matrix.d_decomp.at(3), 2);
+			std::vector<double> test_d { 2, 1, 3, 2 };
+			CHECK_EQ(matrix.d_decomp, test_d);
 		}
 	}
 }
