@@ -1,6 +1,6 @@
 .PHONY: debug release test clean
 
-CXXFLAGS := -Werror -Wpedantic -Wall -std=c++20 -O0 -g -I src/
+CXXFLAGS := -Werror -Wpedantic -Wall -std=c++17 -O0 -g -I src/
 
 test: bin/geom2d.o bin/struct2d.o bin/math2d.o bin/test_geom2d.o bin/test_struct2d.o bin/test_math2d.o
 	$(CXX) $(CXXFLAGS) $^ -o bin/f2

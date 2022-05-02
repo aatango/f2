@@ -13,18 +13,19 @@ namespace math2d {
 		vector2d (const double u, const double y);*/
 
 	// TODO? : separate types of matrices (gen., square, symm., tri., diag., etc)
+	// TODO : validate symmetry of matrix
 	struct symm_matrix {
 		unsigned int size;
 		std::vector<double> matrix;
 		std::vector<double> l_decomp;	// Decomposed L matrix
 		std::vector<double> d_decomp;	// Decomposed D matrix
 
-		symm_matrix(const int _n);
+		symm_matrix(const int n);
 
 		// operator overloads
 
-		void set_cell(const double _d, const unsigned int _r, const unsigned int _c);
-		int fill_matrix(const std::vector<double> _v);
+		void set_cell(const double d, const unsigned int r, const unsigned int c);
+		int fill_matrix(const std::vector<double> v);
 		void decompose(); //LDLT decomposition
 	};
 }

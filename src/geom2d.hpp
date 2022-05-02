@@ -11,11 +11,10 @@ namespace geom2d {
 		std::array<double, 2> forces;
 		std::array<double, 2> displacements;
 
-		node2d();
-		node2d(const double _x, const double _y);
+		node2d(const double x = 0, const double y = 0);
 
 		// Exists mostly to allow other tests.
-		bool operator == (const node2d& _node2) const;
+		bool operator == (const node2d& node2) const;
 
 
 /*		point2_generic operator + (const point2_generic& point2) const;
@@ -31,19 +30,21 @@ namespace geom2d {
 */
 	};
 
-
+	// Currently defined as a bar element (axial stresses only).
 	struct beam2d {
 		//unsigned char id;
 		node2d start_point;
 		node2d end_point;
-		double cross_section;
-		double young_modulus;
+		double cross_section = 0;
+		double young_modulus = 0;
+		//double moment_inertia = 0; Not needed for truss structures
+		std::array<double, 16> stiffness_matrix; // Symmetrical matrix, surely it can be optimised.
 
-		beam2d (const node2d& _start_point, const node2d& _end_point);
-		beam2d (const double _x1, const double _y1, const double _x2, const double _y2);
+		beam2d (const node2d& start_point, const node2d& end_point);
+		beam2d (const double x1, const double y1, const double x2, const double y2);
 
 		// Exists mostly to allow other tests.
-		bool operator == (const beam2d& _beam2) const;
+		bool operator == (const beam2d& beam2) const;
 	
 		/*double get_length();
 		vector2d get_direction();

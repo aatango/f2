@@ -12,8 +12,8 @@ namespace struct2d {
 
 		model2d();
 
-		int add_node2d(const unsigned int _id, const geom2d::node2d& _node2d);
-		int add_beam2d(const unsigned int _id, const geom2d::beam2d& _beam2d);
+		int add_node2d(const unsigned int id, const geom2d::node2d& node2d);
+		int add_beam2d(const unsigned int id, const geom2d::beam2d& beam2d);
 	};
 		
 
