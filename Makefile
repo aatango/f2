@@ -6,7 +6,10 @@ test: bin/geom2d.o bin/struct2d.o bin/math2d.o bin/test_geom2d.o bin/test_struct
 	$(CXX) $(CXXFLAGS) $^ -o bin/f2
 	./bin/f2
 
+# If bin/ doesn't exist on start, it will be created by the first rule in the queue.
+# If first rule is skipped, then folder should already exist.
 bin/geom2d.o: src/geom2d.cpp
+	mkdir -p bin/
 	$(CXX) $(CXXFLAGS) $< -c -o $@
 
 bin/struct2d.o: src/struct2d.cpp
@@ -26,4 +29,4 @@ bin/test_math2d.o: test/test_math2d.cpp
 	$(CXX) $(CXXFLAGS) $< -c -o $@
 
 clean:
-	rm -f bin/*.o
+	rm -rf bin/

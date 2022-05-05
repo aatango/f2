@@ -7,7 +7,9 @@ This repository is intended to host the underlying logic needed for the calculat
 
 ## Getting started
 ### Setup
-TBD.
+Run "make"; "make clean" to delete the program.
+
+Until otherwise specified, the default will be to compile without any optimisations, with debugging information, and to run the tests afterwards.
 
 ### Usage
 ***The following represents the current design intent, and is not yet implemented!***
