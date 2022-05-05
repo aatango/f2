@@ -41,8 +41,26 @@ double node2d::distance_to(const node2d& node2) const {
 }
 
 
-beam2d::beam2d (const node2d& start_point, const node2d& end_point) :
-	start_point(start_point), end_point(end_point) {}
+beam2d::beam2d (
+	const node2d& start_point, const node2d& end_point, double cs, double e_mod) :
+	start_point(start_point), end_point(end_point), cross_section(cs), young_modulus(e_mod)	{
+		double l = this->get_length();
+		double c = (this->end_point.x - this->start_point.x) / l;
+		double s = (this->end_point.y - this->start_point.y) / l;
+		double stiffness = this->cross_section * this->young_modulus / l;
+
+		this->local_stiffness_matrix = {
+			stiffness, -1 * stiffness,
+			-1 * stiffness, stiffness
+		};
+
+		this->global_stiffness_matrix = {
+			stiffness * c * c, stiffness * c * s, -1 * stiffness * c * c, -1 * stiffness * c * s,
+			stiffness * c * s, stiffness * s * s, -1 * stiffness * c * s, -1 * stiffness * s * s,
+			-1 * stiffness * c * c, -1 * stiffness * c * s, stiffness * c * c, stiffness * c * s,
+			-1 * stiffness * c * s, -1 * stiffness * s * s, stiffness * c * s, stiffness * s * s
+		};
+	}
 
 beam2d::beam2d (const double x1, const double y1,const double x2, const double y2) :
         start_point(node2d(x1, y1)), end_point(node2d(x2, y2)) {}

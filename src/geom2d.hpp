@@ -36,12 +36,23 @@ namespace geom2d {
 		//unsigned char id;
 		node2d start_point;
 		node2d end_point;
-		double cross_section = 0;
-		double young_modulus = 0;
+		double cross_section;
+		double young_modulus;
 		//double moment_inertia = 0; Not needed for truss structures
-		std::array<double, 16> stiffness_matrix; // Symmetrical matrix, surely it can be optimised.
 
-		beam2d (const node2d& start_point, const node2d& end_point);
+		/* saving both local and global stiffness matrices should help with execution speed,
+                 * while not costing too much in space requirements.
+                 * Also, these are symmetrical matrices, there's probably a way to optimise them.
+                 */
+		std::array<double, 16> global_stiffness_matrix;
+		std::array<double, 4> local_stiffness_matrix;
+
+		beam2d (
+			const node2d& start_point,
+			const node2d& end_point,
+			const double cs = 0,
+			const double e_mod = 0
+		);
 		beam2d (const double x1, const double y1, const double x2, const double y2);
 
 		// Exists mostly to allow other tests.
