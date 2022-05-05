@@ -2,6 +2,7 @@
 #include "doctest.h"
 
 #include <iostream>
+#include <cmath>
 
 #include "geom2d.hpp"
 using namespace geom2d;
@@ -30,6 +31,13 @@ TEST_SUITE("Node2d") {
 			CHECK_EQ(point1, point2);
 		}
 	}
+	TEST_CASE("Methods") {
+		SUBCASE("distance_to") {
+			node2d node1(1, 3);
+			node2d node2(2, 4);
+			CHECK_EQ(node1.distance_to(node2), std::sqrt(2));
+		}
+	}
 }
 
 TEST_SUITE("Beam2d") {
@@ -54,6 +62,12 @@ TEST_SUITE("Beam2d") {
 			beam2d beam1(0, 0, 1, 2);
 			beam2d beam2(0, 0, 1, 2);
 			CHECK_EQ(beam1, beam2);
+		}
+	}
+	TEST_CASE("Methods") {
+		SUBCASE("get_length()") {
+			beam2d beam(2, -6, 7, 3);
+			CHECK_EQ(beam.get_length(), std::sqrt(106));
 		}
 	}
 }

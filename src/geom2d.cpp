@@ -35,12 +35,11 @@ template <class T>
 vector2_generic<T> point2_generic<T>::operator - (const point2_generic& point2) const {
 	return vector2_generic (x - point2.x, y - point2.y);
 }
-
-template <class T> 
-T point2_generic<T>::distance_to(const point2_generic& point2) {
-	return std::sqrt(std::pow((x - point2.x), 2) + std::pow((y - point2.y), 2));
-}
 */
+double node2d::distance_to(const node2d& node2) const {
+	return std::sqrt(std::pow((this->x - node2.x), 2) + std::pow((this->y - node2.y), 2));
+}
+
 
 beam2d::beam2d (const node2d& start_point, const node2d& end_point) :
 	start_point(start_point), end_point(end_point) {}
@@ -52,6 +51,6 @@ bool beam2d::operator == (const beam2d& beam2) const {
 	return this->start_point == beam2.start_point && this->end_point == beam2.end_point;
 }
 
-//double line2d::get_length() { return start_point.distance_to(end_point); }
+double beam2d::get_length() { return this->start_point.distance_to(this->end_point); }
 //auto line2d::get_direction() { return vector2d(start_point, end_point).normalise(); }
 //auto line2d::get_normal() { return Line2d::get_direction.normal(); }

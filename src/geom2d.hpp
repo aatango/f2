@@ -16,6 +16,7 @@ namespace geom2d {
 		// Exists mostly to allow other tests.
 		bool operator == (const node2d& node2) const;
 
+		double distance_to(const node2d& node2) const;
 
 /*		point2_generic operator + (const point2_generic& point2) const;
 		geom2::vector2_generic<T> operator - (const point2_generic& point2) const;
@@ -46,8 +47,8 @@ namespace geom2d {
 		// Exists mostly to allow other tests.
 		bool operator == (const beam2d& beam2) const;
 	
-		/*double get_length();
-		vector2d get_direction();
+		double get_length();
+		/*vector2d get_direction();
 		vector2d GetNormal();*/
 	};
 };
