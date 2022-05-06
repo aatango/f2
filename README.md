@@ -5,6 +5,8 @@
 
 This repository is intended to host the underlying logic needed for the calculation, as well as a simple CLI. GUI frontends will be hosted on their own, even if directly referencing to this library.
 
+It is currently early in development; no structure can, as of yet, be analysed.
+
 ## Getting started
 ### Setup
 Run "make"; "make clean" to delete the program.
@@ -20,4 +22,17 @@ In the end, a quick summary of the calculation is shown in the terminal, with mo
 
 ## FAQ
 ### Why?
-There are two main motivations for this endeavour: firstly, the desire to procude a "non-trivial" project to help me develop my software development skills; it also has the long term goal of becoming an alternative to an educational tool that existed at the time I was studying structural engineering (which seems to have since gone behind a registration paywall).
+There are two main motivations for this endeavour: firstly, the desire to procude a "non-trivial" project to help me develop my software development skills; it also has the long term goal of becoming an alternative to an educational tool that existed at the time I was studying structural engineering (which seems to have since gone behind a registration wall).
+
+### To-do
+Get a minimal viable product out, then add some extra functionality without breaking compatibility, before updating to planar frame analysis.
+
+The following is a non-exhaustive roadmap:
+
+1. Planar truss (1 material, and 1 cross-section);
+	* \+ _m_ materials;
+	* \+ _n_ cross-sections;
+2. Planar frame (with all of the above);
+	* \+ beam loads;
+
+
