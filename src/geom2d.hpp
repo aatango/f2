@@ -10,8 +10,9 @@ namespace geom2d {
 		double y;
 		std::array<double, 2> forces;
 		std::array<double, 2> displacements;
+		std::array<bool, 2> supports;
 
-		node2d(const double x = 0, const double y = 0);
+		node2d(const double x = 0, const double y = 0, const bool xx = false, const bool yy = false);
 
 		// Exists mostly to allow other tests.
 		bool operator == (const node2d& node2) const;
@@ -34,8 +35,8 @@ namespace geom2d {
 	// Currently defined as a bar element (axial stresses only).
 	struct beam2d {
 		//unsigned char id;
-		node2d start_point;
-		node2d end_point;
+		node2d start_node;
+		node2d end_node;
 		double cross_section;
 		double young_modulus;
 		//double moment_inertia = 0; Not needed for truss structures
@@ -48,8 +49,8 @@ namespace geom2d {
 		std::array<double, 4> local_stiffness_matrix;
 
 		beam2d (
-			const node2d& start_point,
-			const node2d& end_point,
+			const node2d& start_node,
+			const node2d& end_node,
 			const double cs = 0,
 			const double e_mod = 0
 		);
