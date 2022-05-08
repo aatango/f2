@@ -1,21 +1,27 @@
 #ifndef struct2d_hpp_INCLUDED
 #define struct2d_hpp_INCLUDED
 
-#include <unordered_map>
+#include <vector>
 
 #include "geom2d.hpp"
 
-namespace struct2d {
-	struct model2d {
-		std::unordered_map<unsigned int, geom2d::node2d> nodes2d;
-		std::unordered_map<unsigned int, geom2d::beam2d> beams2d;
+namespace f2 {
+	struct struct2d {
+		unsigned int dof = 2;	// Degrees of Freedom (dof): truss = 2; frame = 3
+		std::vector<geom2d::node2d> nodes;
+		std::vector<geom2d::beam2d> beams;
+		std::vector<double> global_stiffness_matrix;
 
-		model2d();
+		struct2d();
 
-		int add_node2d(const unsigned int id, const geom2d::node2d& node2d);
-		int add_beam2d(const unsigned int id, const geom2d::beam2d& beam2d);
+		void add_node2d(const geom2d::node2d& n);
+		void set_nodes(const std::vector<geom2d::node2d>& n);
+		void add_beam2d(const geom2d::beam2d& b);
+		void set_beams(const std::vector<geom2d::beam2d>& b);
+
+		void build_stiffness_matrix();
 	};
-		
+
 
 };
 
