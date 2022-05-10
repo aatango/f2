@@ -27,6 +27,8 @@ namespace math2d {
 		void set_cell(const double d, const unsigned int r, const unsigned int c);
 		int fill_matrix(const std::vector<double> v);
 		void decompose(); //LDLT decomposition
+
+		std::vector<double> vector_multiplication(const std::vector<double>& v1, const std::vector<double>& v2) const;
 	};
 }
 

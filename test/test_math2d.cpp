@@ -66,4 +66,17 @@ TEST_SUITE("math2d") {
 			CHECK_EQ(matrix.d_decomp, test_d);
 		}
 	}
+	TEST_CASE("Forward substitution") {
+	}
+	TEST_CASE("Diagonal multiplication") {
+		symm_matrix s(5);
+		std::vector<double> v1 { 1, 1, 2, 3, 5 };
+		std::vector<double> v2 { 8, 13, 21, 34, 55 };
+		std::vector<double> expected_v { 8, 13, 42, 102, 275 };
+		std::vector<double> actual_v = s.vector_multiplication(v1, v2);
+
+		CHECK_EQ(actual_v, expected_v);
+	}
+	TEST_CASE("Backward subtitution") {
+	}
 }

@@ -1,3 +1,5 @@
+#include <stdexcept>
+
 #include "math2d.hpp"
 
 using namespace math2d;
@@ -29,7 +31,7 @@ void symm_matrix::decompose() {
 		}
 		this->d_decomp.at(j) = this->matrix.at(j * this->size + j) - d_sum;
 		this->l_decomp.at(j * this->size + j) = 1;
-		
+
 		for (unsigned int i = j + 1; i < this->size; ++i) {
 			double l_sum = 0;
 			for (unsigned int k = 0; k < j; ++k) {
@@ -42,4 +44,16 @@ void symm_matrix::decompose() {
 
 		}
 	}
+}
+
+std::vector<double> symm_matrix::vector_multiplication(
+	const std::vector<double>& v1,
+	const std::vector<double>& v2
+) const {
+	if (v1.size() != v2.size()) { throw std::logic_error("Input vectors not the same size"); }
+
+	std::vector<double> v{};
+	for (unsigned int i = 0; i < v1.size(); ++i) { v.push_back(v1.at(i) * v2.at(i)); }
+
+	return v;
 }
