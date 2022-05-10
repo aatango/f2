@@ -5,7 +5,10 @@
 
 using namespace geom2d;
 
-node2d::node2d(const double x, const double y, const bool xx, const bool yy) :  x(x), y(y) {}
+node2d::node2d(const double x, const double y, const bool xx, const bool yy) :
+	x(x),
+	y(y),
+	supports({ xx, yy }) {}
 
 bool node2d::operator == (const node2d& node2) const {
 	return this->x == node2.x && this->y == node2.y;

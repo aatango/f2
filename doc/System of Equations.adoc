@@ -1,0 +1,11 @@
+= Solving the system of equations
+André Teixeira
+v0.1, 2022-05-10
+
+We decompose the global stiffness matrix onto its LDLT decomposition, before solving the system of equations.
+
+To restrain a given degree of freedom (DOF) and still use Cholesky decomposition, we need to do two intermediate steps:
+- turn the constrained DOF into its identity (ie. every row and column of that DOF become zero, except for the DOF itself, which becomes 1); and
+- turn the associated force component into zero.
+
+We can now solve the system of equations and obtain all global displacements. Afterwards, we can recompute the force components for the restrained displacements, thus obtaining the global nodal reactions.

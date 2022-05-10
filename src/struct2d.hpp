@@ -20,6 +20,9 @@ namespace f2 {
 		void set_beams(const std::vector<geom2d::beam2d>& b);
 
 		void build_stiffness_matrix();
+
+		void apply_restraints();
+		void restrain_dof(const unsigned int d);
 	};
 
 

@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <stdexcept>
 #include <vector>
 
 #include "struct2d.hpp"
@@ -49,4 +50,27 @@ void struct2d::build_stiffness_matrix() {
 				beam.global_stiffness_matrix.at(beam_c + beam_r * beam_dof);
 		}
 	}
+}
+
+void struct2d::apply_restraints() {
+	for (unsigned int n = 0; n < nodes.size(); ++n) {
+		for (unsigned int s = 0; s < nodes.at(n).supports.size(); ++s) {
+			if (nodes.at(n).supports.at(s)) { restrain_dof(2 * n + s); }
+		}
+	}
+}
+
+void struct2d::restrain_dof(const unsigned int d) {
+	unsigned int s = this->dof * this->nodes.size();
+	if (d > s) {
+		throw std::logic_error("Given DoF is outside the scope of this structure.");
+	}
+
+	for (unsigned int y = 0; y < s; ++y) { this->global_stiffness_matrix.at(d + y * s) = 0; }
+	for (unsigned int x = 0; x < s; ++x) { this->global_stiffness_matrix.at(x + d * s) = 0; }
+	this->global_stiffness_matrix.at(d + d * s) = 1;
+
+	unsigned int n = d / 2;
+	unsigned int local_dof = d % 2;
+	this->nodes.at(n).forces.at(local_dof) = 0;
 }
