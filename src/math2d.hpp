@@ -29,6 +29,7 @@ namespace math2d {
 		void decompose(); //LDLT decomposition
 
 		std::vector<double> vector_multiplication(const std::vector<double>& v1, const std::vector<double>& v2) const;
+		std::vector<double> forward_substitution(const std::vector<double>& l, const std::vector<double>& b) const;
 	};
 }
 

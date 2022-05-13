@@ -57,3 +57,10 @@ std::vector<double> symm_matrix::vector_multiplication(
 
 	return v;
 }
+
+std::vector<double> symm_matrix::forward_substitution(
+	const std::vector<double>& l,
+	const std::vector<double>& b) const
+{
+	throw std::logic_error("Not yet implemented");
+}
