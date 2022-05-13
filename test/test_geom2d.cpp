@@ -41,6 +41,20 @@ TEST_SUITE("Node2d") {
 
 			CHECK_EQ(node1.distance_to(node2), std::sqrt(2));
 		}
+		SUBCASE("add loading") {
+			node2d node1;
+			node1.apply_loading(10,10);
+			std::array<double, 2> actual = node1.forces;
+			std::array<double, 2> expected { 10, 10 };
+			CHECK_EQ(actual, expected);
+
+			node1.apply_loading(0, 10);
+			actual = node1.forces;
+			REQUIRE_NE(actual, expected);
+
+			expected = {0, 10};
+			CHECK_EQ(actual, expected);
+		}
 	}
 }
 

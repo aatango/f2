@@ -18,6 +18,7 @@ namespace geom2d {
 		bool operator == (const node2d& node2) const;
 
 		double distance_to(const node2d& node2) const;
+		void apply_loading(const double fx = 0, const double fy = 0);
 
 /*		point2_generic operator + (const point2_generic& point2) const;
 		geom2::vector2_generic<T> operator - (const point2_generic& point2) const;

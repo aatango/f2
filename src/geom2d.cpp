@@ -43,6 +43,8 @@ double node2d::distance_to(const node2d& node2) const {
 	return std::sqrt(std::pow((this->x - node2.x), 2) + std::pow((this->y - node2.y), 2));
 }
 
+void node2d::apply_loading(const double fx, const double fy) { this->forces = { fx, fy }; }
+
 
 beam2d::beam2d (
 	const node2d& sn, const node2d& en, double cs, double e_mod) :
