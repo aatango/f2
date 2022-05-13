@@ -19,6 +19,7 @@ TEST_SUITE("Struct2d") {
 
 		node2d node1(0, 3);
 		node2d node2(3, 3);
+		node2.forces = { 10, 10 };	// Method not yet incorporating forces, but they'll be needed.
 		node2d node3(3, 0, false, true);
 		node2d node4(0, 0, true, true);
 		std::vector<node2d> nodes { node1, node2, node3, node4};
@@ -60,7 +61,7 @@ TEST_SUITE("Struct2d") {
 			CHECK_EQ(beam1.global_stiffness_matrix, beam_stiffness);
 		}
 		SUBCASE("stiffness matrix") {
-			model.build_stiffness_matrix();
+			model.build_system_equations();
 
 			double s = 280000;	//stiffness constant
 			std::vector<double> test_matrix = {
@@ -88,13 +89,13 @@ TEST_SUITE("Struct2d") {
 
 			model.apply_restraints();
 			unsigned int no_dof = model.dof * model.nodes.size();
-			CHECK_NE(model.global_stiffness_matrix.at(2 * 2 * (1 + no_dof)), 1.0);
-			CHECK_EQ(model.global_stiffness_matrix.at((2 * 2 + 1) * (1 + no_dof)), 1.0);
-			CHECK_EQ(model.global_stiffness_matrix.at((3 * 2) * (1 + no_dof)), 1.0);
-			CHECK_EQ(model.global_stiffness_matrix.at((3 * 2 + 1) * (1 + no_dof)), 1.0);
-			CHECK_EQ(model.nodes.at(2).forces.at(1), 0.0);
-			CHECK_EQ(model.nodes.at(3).forces.at(0), 0);
-			CHECK_EQ(model.nodes.at(3).forces.at(1), 0);
+			CHECK_NE(model.constrained_stiffness_matrix.at(2 * 2 * (1 + no_dof)), 1.0);
+			CHECK_EQ(model.constrained_stiffness_matrix.at((2 * 2 + 1) * (1 + no_dof)), 1.0);
+			CHECK_EQ(model.constrained_stiffness_matrix.at((3 * 2) * (1 + no_dof)), 1.0);
+			CHECK_EQ(model.constrained_stiffness_matrix.at((3 * 2 + 1) * (1 + no_dof)), 1.0);
+			CHECK_EQ(model.forces.at(5), 0);
+			CHECK_EQ(model.forces.at(6), 0);
+			CHECK_EQ(model.forces.at(7), 0);
 		}
 	}
 }

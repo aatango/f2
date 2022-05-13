@@ -18,7 +18,7 @@ void struct2d::set_nodes(const std::vector<geom2d::node2d>& n) { this->nodes = n
 void struct2d::add_beam2d(const geom2d::beam2d& b) {this->beams.push_back(b); }
 void struct2d::set_beams(const std::vector<geom2d::beam2d>& b) {this->beams = b; }
 
-void struct2d::build_stiffness_matrix() {
+void struct2d::build_system_equations() {
 	unsigned int global_dof = this->dof * this->nodes.size();
 	this->global_stiffness_matrix.resize(global_dof * global_dof);
 	std::fill(
@@ -50,6 +50,12 @@ void struct2d::build_stiffness_matrix() {
 				beam.global_stiffness_matrix.at(beam_c + beam_r * beam_dof);
 		}
 	}
+
+	this->constrained_stiffness_matrix = this->global_stiffness_matrix;
+
+	for (auto& node : this->nodes) {
+		for (auto& force : node.forces) { this->forces.push_back(force); }
+	}
 }
 
 void struct2d::apply_restraints() {
@@ -68,9 +74,7 @@ void struct2d::restrain_dof(const unsigned int d) {
 
 	for (unsigned int y = 0; y < s; ++y) { this->global_stiffness_matrix.at(d + y * s) = 0; }
 	for (unsigned int x = 0; x < s; ++x) { this->global_stiffness_matrix.at(x + d * s) = 0; }
-	this->global_stiffness_matrix.at(d + d * s) = 1;
+	this->constrained_stiffness_matrix.at(d + d * s) = 1;
 
-	unsigned int n = d / 2;
-	unsigned int local_dof = d % 2;
-	this->nodes.at(n).forces.at(local_dof) = 0;
+	this->forces.at(d) = 0;
 }

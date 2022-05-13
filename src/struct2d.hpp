@@ -11,6 +11,9 @@ namespace f2 {
 		std::vector<geom2d::node2d> nodes;
 		std::vector<geom2d::beam2d> beams;
 		std::vector<double> global_stiffness_matrix;
+		std::vector<double> constrained_stiffness_matrix;
+		std::vector<double> forces;
+		std::vector<double> displacements;
 
 		struct2d();
 
@@ -19,7 +22,7 @@ namespace f2 {
 		void add_beam2d(const geom2d::beam2d& b);
 		void set_beams(const std::vector<geom2d::beam2d>& b);
 
-		void build_stiffness_matrix();
+		void build_system_equations();
 
 		void apply_restraints();
 		void restrain_dof(const unsigned int d);
