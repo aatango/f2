@@ -10,6 +10,12 @@ symm_matrix::symm_matrix(const int n) : size(n) {
 	this->d_decomp.resize(n);
 }
 
+symm_matrix::symm_matrix(const std::vector<double> v) : matrix(v) {
+	unsigned int n = v.size();
+	this->l_decomp.resize(n * n);
+	this->d_decomp.resize(n);
+}
+
 void symm_matrix::set_cell(const double i, const unsigned int r, const unsigned int c) {
 	this->matrix.at(r * size + c) = i;
 }

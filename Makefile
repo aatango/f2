@@ -8,14 +8,14 @@ test: bin/geom2d.o bin/struct2d.o bin/math2d.o bin/test_geom2d.o bin/test_struct
 
 # If bin/ doesn't exist on start, it will be created by the first rule in the queue.
 # If first rule is skipped, then folder should already exist.
-bin/geom2d.o: src/geom2d.cpp
+bin/geom2d.o: src/geom2d.cpp src/geom2d.hpp
 	mkdir -p bin/
 	$(CXX) $(CXXFLAGS) $< -c -o $@
 
-bin/struct2d.o: src/struct2d.cpp
+bin/struct2d.o: src/struct2d.cpp src/struct2d.hpp
 	$(CXX) $(CXXFLAGS) $< -c -o $@
 
-bin/math2d.o: src/math2d.cpp
+bin/math2d.o: src/math2d.cpp src/math2d.hpp
 	$(CXX) $(CXXFLAGS) $< -c -o $@
 
 

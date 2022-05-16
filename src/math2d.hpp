@@ -21,6 +21,7 @@ namespace math2d {
 		std::vector<double> d_decomp;	// Decomposed D matrix
 
 		symm_matrix(const int n);
+		symm_matrix(const std::vector<double> v);
 
 		// operator overloads
 

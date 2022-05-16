@@ -8,10 +8,17 @@ using namespace math2d;
 
 TEST_SUITE("math2d") {
 	TEST_CASE("Constructor") {
-		symm_matrix matrix(3);
-		REQUIRE_EQ(matrix.size, 3);
-		REQUIRE_EQ(matrix.matrix.size(), 9);
-		REQUIRE_EQ(matrix.d_decomp.size(), 3);
+		SUBCASE("given size") {
+			symm_matrix matrix(3);
+			REQUIRE_EQ(matrix.size, 3);
+			REQUIRE_EQ(matrix.matrix.size(), 9);
+			REQUIRE_EQ(matrix.d_decomp.size(), 3);
+		}
+		SUBCASE("given vector") {
+			std::vector<double> base_vector { 1, 2, 3, 2, 4, 5, 3, 5, 6 };
+			symm_matrix test_matrix(base_vector);
+			REQUIRE_EQ(test_matrix.matrix, base_vector);
+		}
 	}
 	TEST_CASE("Filling the matrix") {
 		symm_matrix matrix(3);
